@@ -1,7 +1,4 @@
 <?php
-// ==========================================
-// CONEXIÓN A LA BASE DE DATOS CON PDO
-// ==========================================
 
 $host = 'localhost';
 $db   = 'gestionhotelera';
@@ -21,3 +18,6 @@ try {
 } catch (\PDOException $e) {
     throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
+
+// RUTA BASE DEL PROYECTO
+define('BASE_URL', '/');

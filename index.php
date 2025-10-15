@@ -1,10 +1,8 @@
 <?php
-// ==========================================
-// INCLUDES Y CONEXIÓN A LA BASE DE DATOS
-// ==========================================
+
+require_once 'config/db.php';
 include 'includes/header.php';
 include 'includes/navbar.php';
-include 'config/db.php'; // conexión PDO
 
 // ==========================================
 // CONSULTAS PARA EL DASHBOARD
@@ -42,7 +40,7 @@ $tablaReservas = $conn->query("
          TÍTULO PRINCIPAL
          ========================================= -->
     <section class="dashboard-header">
-        <h1>Panel de Gestión <span class="resaltado">Hotel Aurea</span></h1>
+        <h1>Panel de Gestión <span class="resaltado">El Gran Descanso</span></h1>
         <p>Resumen rápido de la actividad del hotel</p>
     </section>
 
