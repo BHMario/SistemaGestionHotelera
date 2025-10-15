@@ -76,12 +76,29 @@ CREATE TABLE tareas_mantenimiento (
 -- 7️. DATOS INICIALES (opcionales)
 -- ==========================
 INSERT INTO estados_limpieza (descripcion) VALUES
-('Limpia'), ('Sucia'), ('En Limpieza');
+('Limpia'),
+('Sucia'),
+('En Limpieza');
 
 INSERT INTO habitaciones (numero, tipo, precio_base, id_estado_limpieza) VALUES
 ('101', 'Sencilla', 50.00, 1),
 ('102', 'Doble', 80.00, 1),
 ('201', 'Suite', 120.00, 2);
+
+INSERT INTO huespedes (nombre, email, documento_identidad) VALUES
+('Laura G.', 'laura@example.com', '12345678A'),
+('Carlos M.', 'carlos@example.com', '87654321B'),
+('Sofía R.', 'sofia@example.com', '11223344C');
+
+INSERT INTO reservas (id_huesped, id_habitacion, fecha_llegada, fecha_salida, precio_total, estado) VALUES
+(1, 1, '2025-10-15', '2025-10-20', 200.00, 'Confirmada'),
+(2, 2, '2025-10-16', '2025-10-18', 150.00, 'Pendiente'),
+(3, 3, '2025-10-17', '2025-10-22', 300.00, 'Confirmada');
+
+INSERT INTO tareas_mantenimiento (id_habitacion, descripcion, fecha_inicio, fecha_fin, estado) VALUES
+(1, 'Revisión de aire acondicionado', '2025-10-10', '2025-10-12', 'Finalizada'),
+(2, 'Cambio de bombillas', '2025-10-14', NULL, 'Activa'),
+(3, 'Reparación del baño', '2025-10-15', NULL, 'Activa');
 
 -- ==========================
 -- 8️. VISTA OPCIONAL: habitaciones_disponibles

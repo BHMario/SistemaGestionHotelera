@@ -1,5 +1,40 @@
-<?php include 'includes/header.php'; ?>
-<?php include 'includes/navbar.php'; ?>
+<?php
+// ==========================================
+// INCLUDES Y CONEXIÓN A LA BASE DE DATOS
+// ==========================================
+include 'includes/header.php';
+include 'includes/navbar.php';
+include 'config/db.php'; // conexión PDO
+
+// ==========================================
+// CONSULTAS PARA EL DASHBOARD
+// ==========================================
+
+// Total habitaciones
+$stmt = $conn->query("SELECT COUNT(*) AS total FROM habitaciones");
+$totalHabitaciones = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+
+// Reservas activas
+$stmt = $conn->query("SELECT COUNT(*) AS total FROM reservas WHERE estado='Confirmada'");
+$reservasActivas = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+
+// Reservas pendientes
+$stmt = $conn->query("SELECT COUNT(*) AS total FROM reservas WHERE estado='Pendiente'");
+$reservasPendientes = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+
+// Alertas de mantenimiento
+$stmt = $conn->query("SELECT COUNT(*) AS total FROM tareas_mantenimiento WHERE estado='Activa'");
+$alertasMantenimiento = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+
+// Reservas recientes (últimas 5)
+$tablaReservas = $conn->query("
+    SELECT r.id_habitacion, h.nombre AS cliente, r.fecha_llegada AS fecha_entrada, r.fecha_salida, r.estado 
+    FROM reservas r 
+    JOIN huespedes h ON r.id_huesped = h.id_huesped
+    ORDER BY r.fecha_llegada DESC 
+    LIMIT 5
+");
+?>
 
 <main class="dashboard container">
 
@@ -17,19 +52,19 @@
     <section class="dashboard-resumen cards">
         <div class="card resumen">
             <h3>Total Habitaciones</h3>
-            <p>45</p> <!-- valor de ejemplo, luego dinámico -->
+            <p><?= $totalHabitaciones ?></p>
         </div>
         <div class="card resumen">
             <h3>Reservas Activas</h3>
-            <p>12</p>
+            <p><?= $reservasActivas ?></p>
         </div>
         <div class="card resumen">
             <h3>Reservas Pendientes</h3>
-            <p>3</p>
+            <p><?= $reservasPendientes ?></p>
         </div>
         <div class="card resumen">
             <h3>Alertas de Mantenimiento</h3>
-            <p>2</p>
+            <p><?= $alertasMantenimiento ?></p>
         </div>
     </section>
 
@@ -71,27 +106,15 @@
                 </tr>
             </thead>
             <tbody>
+                <?php while($reserva = $tablaReservas->fetch(PDO::FETCH_ASSOC)): ?>
                 <tr>
-                    <td>101</td>
-                    <td>Laura G.</td>
-                    <td>2025-10-15</td>
-                    <td>2025-10-20</td>
-                    <td>Activa</td>
+                    <td><?= $reserva['id_habitacion'] ?></td>
+                    <td><?= $reserva['cliente'] ?></td>
+                    <td><?= $reserva['fecha_entrada'] ?></td>
+                    <td><?= $reserva['fecha_salida'] ?></td>
+                    <td><?= $reserva['estado'] ?></td>
                 </tr>
-                <tr>
-                    <td>203</td>
-                    <td>Carlos M.</td>
-                    <td>2025-10-16</td>
-                    <td>2025-10-18</td>
-                    <td>Pendiente</td>
-                </tr>
-                <tr>
-                    <td>305</td>
-                    <td>Sofía R.</td>
-                    <td>2025-10-17</td>
-                    <td>2025-10-22</td>
-                    <td>Activa</td>
-                </tr>
+                <?php endwhile; ?>
             </tbody>
         </table>
     </section>
