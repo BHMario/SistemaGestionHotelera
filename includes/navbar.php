@@ -12,7 +12,8 @@ if ($base_url === '') {
             <li><a href="<?php echo BASE_URL; ?>index.php">Inicio</a></li>
             <li><a href="<?php echo BASE_URL; ?>modules/habitaciones/listar.php">Habitaciones</a></li>
             <li><a href="<?php echo BASE_URL; ?>modules/reservas/listar.php">Reservas</a></li>
-            <li><a href="<?php echo BASE_URL; ?>modules/mantenimiento/listar.php">Mantenimiento</a></li>
+            <li><a href="<?php echo BASE_URL; ?>modules/tareas_mantenimiento/listar.php">Mantenimiento</a></li>
+            <li><a href="<?php echo BASE_URL; ?>modules/huespedes/listar.php">Huéspedes</a></li>
         </ul>
     </div>
 </nav>

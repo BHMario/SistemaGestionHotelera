@@ -1,6 +1,5 @@
 <?php
 // listar.php - módulo habitaciones (PDO)
-// Ajusta rutas de include si necesitas (estas rutas suponen que modules/habitaciones/*)
 require_once '../../config/db.php';
 include '../../includes/header.php';
 include '../../includes/navbar.php';
@@ -27,7 +26,7 @@ $habitaciones = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <?php if (count($habitaciones) > 0): ?>
-        <table class="habitaciones-tabla" role="grid">
+        <table class="habitaciones-tabla">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -47,8 +46,8 @@ $habitaciones = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td><?= number_format($row['precio_base'], 2) ?></td>
                         <td><?= htmlspecialchars($row['estado_limpieza'] ?? 'Sin asignar') ?></td>
                         <td class="habitaciones-acciones">
-                            <a href="editar.php?id=<?= $row['id_habitacion'] ?>" class="editar">Editar</a>
-                            <a href="eliminar.php?id=<?= $row['id_habitacion'] ?>" class="eliminar" onclick="return confirm('¿Seguro que deseas eliminar esta habitación?');">Eliminar</a>
+                            <a href="editar.php?id=<?= $row['id_habitacion'] ?>" class="editar btn">Editar</a>
+                            <a href="eliminar.php?id=<?= $row['id_habitacion'] ?>" class="eliminar btn" onclick="return confirm('¿Seguro que deseas eliminar esta habitación?');">Eliminar</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
