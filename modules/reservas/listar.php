@@ -19,7 +19,7 @@ $reservas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <div class="habitaciones-container">
     <div class="habitaciones-header">
         <h1>Gestión de <span class="resaltado">Reservas</span></h1>
-        <a href="crear.php" class="btn">+ Nueva Reserva</a>
+        <a href="agregar.php" class="btn">+ Nueva Reserva</a>
     </div>
 
     <?php if (!empty($reservas)): ?>

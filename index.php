@@ -78,13 +78,13 @@ $tablaReservas = $conn->query("
             <h3>Reservas</h3>
             <p>Ver y gestionar reservas</p>
         </a>
-        <a href="modules/mantenimiento/listar.php" class="card acceso">
+        <a href="modules/tareas_mantenimiento/listar.php" class="card acceso">
             <h3>Mantenimiento</h3>
             <p>Revisar alertas y tareas</p>
         </a>
-        <a href="modules/clientes/listar.php" class="card acceso">
-            <h3>Clientes</h3>
-            <p>Administrar información de clientes</p>
+        <a href="modules/huespedes/listar.php" class="card acceso">
+            <h3>Huéspedes</h3>
+            <p>Administrar información de huéspedes</p>
         </a>
     </section>
 
