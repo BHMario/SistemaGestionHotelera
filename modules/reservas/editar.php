@@ -30,7 +30,7 @@ $huespedes = $conn->query("SELECT id_huesped, nombre FROM huespedes ORDER BY nom
         <a href="listar.php" class="btn">← Volver</a>
     </div>
     <div class="habitaciones-form">
-        <form action="actualizar.php" method="POST">
+        <form action="editar.php" method="POST">
             <input type="hidden" name="id_reserva" value="<?= $reserva['id_reserva'] ?>">
 
             <label>Huésped</label>

@@ -26,7 +26,7 @@ if (!$habitacion) {
         <a href="listar.php" class="btn">← Volver</a>
     </div>
     <div class="habitaciones-form">
-        <form action="actualizar.php" method="POST">
+        <form action="editar.php" method="POST">
             <input type="hidden" name="id" value="<?= $habitacion['id_habitacion'] ?>">
 
             <label>Número</label>
