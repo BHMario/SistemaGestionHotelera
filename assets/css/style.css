@@ -351,7 +351,7 @@ body {
     transition: var(--transicion);
 }
 
-/* 🎨 Hover mejorado */
+/* Hover mejorado */
 .dashboard-modulos .card.acceso:hover {
     background: var(--color-acento);
     color: var(--color-fondo);
@@ -435,7 +435,7 @@ body {
 }
 
 /* =========================================
-   13. MÓDULOS: HABITACIONES / RESERVAS
+   13. MÓDULOS INTERNOS
 ========================================= */
 
 /* Contenedor principal de cada módulo */
@@ -492,7 +492,7 @@ body {
 .habitaciones-tabla th,
 .habitaciones-tabla td {
     padding: 0.9rem 1rem;
-    text-align: center; /* ✅ Centrado */
+    text-align: center;
     border-bottom: 1px solid rgba(255,255,255,0.1);
     vertical-align: middle;
     word-wrap: break-word;
@@ -521,8 +521,8 @@ body {
     display: flex;
     gap: 0.5rem;
     justify-content: center;
-    flex-wrap: nowrap; /* ✅ Evita que se apilen verticalmente */
-    overflow-x: auto;  /* ✅ Permite scroll horizontal si no caben */
+    flex-wrap: nowrap;
+    overflow-x: auto;
 }
 
 .habitaciones-acciones a {
@@ -596,7 +596,7 @@ body {
 }
 
 /* =========================================
-   RESPONSIVE
+   RESPONSIVE DESIGN MÓDULOS INTERNOS
 ========================================= */
 @media (max-width: 880px) {
     .habitaciones-tabla th,
@@ -625,4 +625,105 @@ body {
         width: 95%;
         padding: 1.5rem;
     }
+}
+
+/* =========================================
+   14. LOGIN
+========================================= */
+body.login-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--color-fondo);
+    min-height: 100vh;
+    font-family: var(--fuente-principal);
+    color: var(--color-texto);
+}
+
+.login-container {
+    width: 100%;
+    max-width: 380px;
+    margin: 6rem auto;
+    padding: 2.5rem;
+    background: var(--color-fondo-sec);
+    border-radius: var(--borde-radio);
+    box-shadow: var(--sombra-suave);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-container h1 {
+    color: var(--color-acento);
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.login-container p {
+    color: var(--color-texto-sec);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.login-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* separa los campos y botón */
+}
+
+.login-form label {
+    display: block;
+    color: var(--color-acento-claro);
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border-radius: var(--borde-radio);
+    border: none;
+    background: var(--color-fondo);
+    color: var(--color-texto);
+    font-size: 1rem;
+    transition: var(--transicion);
+}
+
+.login-form input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(214,184,108,0.4);
+}
+
+.login-form button {
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    background: var(--color-acento); /* mismo color que botones internos */
+    color: var(--color-fondo);
+    font-weight: 600;
+    border: none;
+    border-radius: var(--borde-radio);
+    cursor: pointer;
+    font-size: 1.05rem;
+    box-shadow: var(--sombra-suave);
+    transition: var(--transicion);
+}
+
+.login-form button:hover {
+    background: var(--color-acento-claro); /* mismo efecto hover que botones internos */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+}
+
+.login-form .error {
+    color: #b23a3a;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.login-form .info {
+    color: var(--color-texto-sec);
+    font-size: 0.9rem;
+    text-align: center;
 }

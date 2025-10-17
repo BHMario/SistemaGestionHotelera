@@ -1,5 +1,15 @@
 <?php
 
+session_start();
+
+// ==============================
+// PROTECCIÓN: Solo usuarios logueados
+// ==============================
+if (!isset($_SESSION['usuario'])) {
+    header('Location: login/login.php');
+    exit;
+}
+
 require_once 'config/db.php';
 include 'includes/header.php';
 include 'includes/navbar.php';

@@ -73,7 +73,16 @@ CREATE TABLE tareas_mantenimiento (
 ) ENGINE=InnoDB;
 
 -- ==========================
--- 7️. DATOS INICIALES (opcionales)
+-- 7️. TABLA: usuarios
+-- ==========================
+CREATE TABLE usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    usuario VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+-- ==========================
+-- 8. DATOS INICIALES
 -- ==========================
 INSERT INTO estados_limpieza (descripcion) VALUES
 ('Limpia'),
@@ -100,8 +109,11 @@ INSERT INTO tareas_mantenimiento (id_habitacion, descripcion, fecha_inicio, fech
 (2, 'Cambio de bombillas', '2025-10-14', NULL, 'Activa'),
 (3, 'Reparación del baño', '2025-10-15', NULL, 'Activa');
 
+INSERT INTO usuarios (usuario, password) VALUES
+('admin', '$2y$10$u7pruBCoFaNhkqNzOgv7H.T4QRf3G31yaNOTCesRFWhGQ/NPFAybC'); 
+
 -- ==========================
--- 8️. VISTA OPCIONAL: habitaciones_disponibles
+-- 9. VISTA OPCIONAL: habitaciones_disponibles
 -- ==========================
 CREATE OR REPLACE VIEW habitaciones_disponibles AS
 SELECT h.*
@@ -111,7 +123,7 @@ LEFT JOIN tareas_mantenimiento tm
 WHERE tm.id_tarea IS NULL;
 
 -- ==========================
--- 9️. TRIGGER: Validar solapamiento de reservas
+-- 10. TRIGGER: Validar solapamiento de reservas
 -- ==========================
 DELIMITER $$
 CREATE TRIGGER validar_solapamiento_reserva
@@ -140,7 +152,7 @@ END$$
 DELIMITER ;
 
 -- ==========================
--- 10. TRIGGER: Impedir reservas con mantenimiento activo
+-- 11. TRIGGER: Impedir reservas con mantenimiento activo
 -- ==========================
 DELIMITER $$
 CREATE TRIGGER validar_mantenimiento_activo
