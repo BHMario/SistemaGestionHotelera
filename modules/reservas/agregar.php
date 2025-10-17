@@ -30,6 +30,7 @@ $huespedes = $conn->query("SELECT * FROM huespedes")->fetchAll();
 <div class="habitaciones-container">
     <div class="habitaciones-header">
         <h1>Nueva Reserva</h1>
+        <a href="listar.php" class="btn">Volver</a>
     </div>
 
     <form method="POST" class="habitaciones-form">

@@ -1,76 +1,75 @@
 <?php
-// modules/reservas/editar.php
 require_once '../../config/db.php';
 include '../../includes/header.php';
 include '../../includes/navbar.php';
 
-$id = $_GET['id'];
-$reserva = $conn->query("SELECT * FROM reservas WHERE id_reserva = $id")->fetch();
-$habitaciones = $conn->query("SELECT * FROM habitaciones")->fetchAll();
-$huespedes = $conn->query("SELECT * FROM huespedes")->fetchAll();
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id_huesped = $_POST['id_huesped'];
-    $id_habitacion = $_POST['id_habitacion'];
-    $fecha_llegada = $_POST['fecha_llegada'];
-    $fecha_salida = $_POST['fecha_salida'];
-    $precio_total = $_POST['precio_total'];
-    $estado = $_POST['estado'];
-
-    $stmt = $conn->prepare("
-        UPDATE reservas
-        SET id_huesped = ?, id_habitacion = ?, fecha_llegada = ?, fecha_salida = ?, precio_total = ?, estado = ?
-        WHERE id_reserva = ?
-    ");
-    $stmt->execute([$id_huesped, $id_habitacion, $fecha_llegada, $fecha_salida, $precio_total, $estado, $id]);
-
+// Obtener datos de la reserva
+$id = $_GET['id'] ?? null;
+if (!$id) {
     header('Location: listar.php');
     exit;
 }
+
+$stmt = $conn->prepare("SELECT * FROM reservas WHERE id_reserva = ?");
+$stmt->execute([$id]);
+$reserva = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$reserva) {
+    header('Location: listar.php');
+    exit;
+}
+
+// Obtener habitaciones y huéspedes para el select
+$habitaciones = $conn->query("SELECT id_habitacion, numero FROM habitaciones ORDER BY numero ASC")->fetchAll();
+$huespedes = $conn->query("SELECT id_huesped, nombre FROM huespedes ORDER BY nombre ASC")->fetchAll();
 ?>
 
 <div class="habitaciones-container">
     <div class="habitaciones-header">
         <h1>Editar Reserva</h1>
+        <a href="listar.php" class="btn">← Volver</a>
     </div>
+    <div class="habitaciones-form">
+        <form action="actualizar.php" method="POST">
+            <input type="hidden" name="id_reserva" value="<?= $reserva['id_reserva'] ?>">
 
-    <form method="POST" class="habitaciones-form">
-        <label for="id_huesped">Huésped</label>
-        <select name="id_huesped" required>
-            <?php foreach ($huespedes as $huesped): ?>
-                <option value="<?= $huesped['id_huesped'] ?>" <?= $reserva['id_huesped'] == $huesped['id_huesped'] ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($huesped['nombre']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
+            <label>Huésped</label>
+            <select name="id_huesped" required>
+                <?php foreach ($huespedes as $huesped): ?>
+                    <option value="<?= $huesped['id_huesped'] ?>" <?= $huesped['id_huesped'] == $reserva['id_huesped'] ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($huesped['nombre']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
 
-        <label for="id_habitacion">Habitación</label>
-        <select name="id_habitacion" required>
-            <?php foreach ($habitaciones as $hab): ?>
-                <option value="<?= $hab['id_habitacion'] ?>" <?= $reserva['id_habitacion'] == $hab['id_habitacion'] ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($hab['numero']) ?> - <?= $hab['tipo'] ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
+            <label>Habitación</label>
+            <select name="id_habitacion" required>
+                <?php foreach ($habitaciones as $hab): ?>
+                    <option value="<?= $hab['id_habitacion'] ?>" <?= $hab['id_habitacion'] == $reserva['id_habitacion'] ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($hab['numero']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
 
-        <label for="fecha_llegada">Fecha Llegada</label>
-        <input type="date" name="fecha_llegada" value="<?= $reserva['fecha_llegada'] ?>" required>
+            <label>Fecha Llegada</label>
+            <input type="date" name="fecha_llegada" value="<?= $reserva['fecha_llegada'] ?>" required>
 
-        <label for="fecha_salida">Fecha Salida</label>
-        <input type="date" name="fecha_salida" value="<?= $reserva['fecha_salida'] ?>" required>
+            <label>Fecha Salida</label>
+            <input type="date" name="fecha_salida" value="<?= $reserva['fecha_salida'] ?>" required>
 
-        <label for="precio_total">Precio Total</label>
-        <input type="number" name="precio_total" value="<?= $reserva['precio_total'] ?>" step="0.01" required>
+            <label>Precio Total (€)</label>
+            <input type="number" step="0.01" name="precio_total" value="<?= $reserva['precio_total'] ?>" required>
 
-        <label for="estado">Estado</label>
-        <select name="estado">
-            <option value="Pendiente" <?= $reserva['estado'] == 'Pendiente' ? 'selected' : '' ?>>Pendiente</option>
-            <option value="Confirmada" <?= $reserva['estado'] == 'Confirmada' ? 'selected' : '' ?>>Confirmada</option>
-            <option value="Cancelada" <?= $reserva['estado'] == 'Cancelada' ? 'selected' : '' ?>>Cancelada</option>
-        </select>
+            <label>Estado</label>
+            <select name="estado" required>
+                <option value="Pendiente" <?= $reserva['estado'] === 'Pendiente' ? 'selected' : '' ?>>Pendiente</option>
+                <option value="Confirmada" <?= $reserva['estado'] === 'Confirmada' ? 'selected' : '' ?>>Confirmada</option>
+                <option value="Cancelada" <?= $reserva['estado'] === 'Cancelada' ? 'selected' : '' ?>>Cancelada</option>
+            </select>
 
-        <button type="submit">Actualizar Reserva</button>
-    </form>
+            <button type="submit">Actualizar</button>
+        </form>
+    </div>
 </div>
 
 <?php include '../../includes/footer.php'; ?>
