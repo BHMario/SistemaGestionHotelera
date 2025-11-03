@@ -78,7 +78,8 @@ CREATE TABLE tareas_mantenimiento (
 CREATE TABLE usuarios (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     usuario VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+	rol ENUM('admin','usuario') NOT NULL DEFAULT 'usuario'
 );
 
 -- ==========================
@@ -109,8 +110,13 @@ INSERT INTO tareas_mantenimiento (id_habitacion, descripcion, fecha_inicio, fech
 (2, 'Cambio de bombillas', '2025-10-14', NULL, 'Activa'),
 (3, 'Reparación del baño', '2025-10-15', NULL, 'Activa');
 
-INSERT INTO usuarios (usuario, password) VALUES
-('admin', '$2y$10$u7pruBCoFaNhkqNzOgv7H.T4QRf3G31yaNOTCesRFWhGQ/NPFAybC'); 
+-- Usuario admin
+INSERT INTO usuarios (usuario, password, rol) VALUES
+('admin', '$2y$10$u7pruBCoFaNhkqNzOgv7H.T4QRf3G31yaNOTCesRFWhGQ/NPFAybC', 'admin'); 
+
+-- Usuario normal para reservas
+INSERT INTO usuarios (usuario, password, rol) VALUES
+('cliente1', '$2b$12$ItLFxqlfpFe6DGpPRPf/dOFxFIPV/Xx5s6H4ERP2jhZsihfQthkku', 'usuario');
 
 -- ==========================
 -- 9. VISTA OPCIONAL: habitaciones_disponibles
