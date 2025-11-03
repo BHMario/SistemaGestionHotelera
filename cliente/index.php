@@ -2,7 +2,7 @@
 session_start();
 
 // Solo usuarios con rol 'cliente' pueden entrar
-if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'cliente') {
+if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol']) || $_SESSION['rol'] !== 'usuario') {
     header('Location: ../login/login.php');
     exit;
 }
@@ -19,8 +19,8 @@ require_once '../config/db.php';
 <body>
     <h1>Bienvenido, <?= htmlspecialchars($_SESSION['usuario']) ?></h1>
     <nav>
-        <a href="reservas_listar.php">Mis Reservas</a> |
-        <a href="reservas_nueva.php">Hacer Nueva Reserva</a> |
+        <a href="mis_reservas.php">Mis Reservas</a> |
+        <a href="nueva_reserva.php">Hacer Nueva Reserva</a> |
         <a href="../login/logout.php">Cerrar Sesión</a>
     </nav>
 </body>

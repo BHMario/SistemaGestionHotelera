@@ -1,5 +1,5 @@
 <?php
-ob_start(); // Evita problemas de encabezados
+ob_start();
 session_start();
 require_once '../config/db.php';
 
@@ -18,33 +18,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute([$usuario]);
             $usuarioBD = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($usuarioBD && password_verify($password, $usuarioBD['password'])) {
-                // Guardar sesión con datos importantes
-                $_SESSION['usuario'] = $usuarioBD['usuario'];
-                $_SESSION['rol'] = $usuarioBD['rol'];
+            if (!$usuarioBD) {
+            } elseif ($usuarioBD) {
+                if (password_verify($password, $usuarioBD['password'])) {
+                    $_SESSION['usuario'] = $usuarioBD['usuario'];
+                    $_SESSION['rol'] = $usuarioBD['rol'];
+                    $_SESSION['id_usuario'] = $usuarioBD['id'] ?? null;
 
-                echo "*********************" . $usuarioBD['rol'];
+                    if ($usuarioBD['rol'] === 'admin') {
+                        header('Location: ../index.php');
+                        exit;
+                    } elseif ($usuarioBD['rol'] === 'usuario') {
+                        header('Location: ../cliente/index.php');
+                        $errores[] = "no se puede acceder a la ruta";
+                        exit;
+                    } else {
+                        $errores[] = "Rol de usuario no reconocido.";
+                    }
 
-                // Redirigir según el rol
-                if ($usuarioBD['rol'] === 'admin') {
-                    header('Location: ../index.php');
-                    exit;
-                } elseif ($usuarioBD['rol'] === 'usuario') {
-                    header('Location: ../cliente/index.php');
-                    exit;
                 } else {
-                    $errores[] = "Rol de usuario no válido. Contacte con el administrador.";
+                    $errores[] = "Usuario o contraseña incorrectos.";
                 }
             } else {
                 $errores[] = "Usuario o contraseña incorrectos.";
             }
         } catch (PDOException $e) {
-            $errores[] = "Error de conexión: " . $e->getMessage();
         }
     }
 }
 
-ob_end_flush(); // Envía todo el contenido acumulado
+ob_end_flush();
 ?>
 
 <!DOCTYPE html>
