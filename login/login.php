@@ -40,12 +40,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Login - El Gran Descanso</title>
     <link rel="stylesheet" href="../assets/css/style.css"> <!-- Ajusta según tu CSS -->
 </head>
-<body>
+<body class="login-body">
     <div class="login-container">
         <h1>Iniciar Sesión</h1>
 
         <?php if (!empty($errores)): ?>
-            <div class="errores">
+            <div class="login-error">
                 <ul>
                     <?php foreach ($errores as $error): ?>
                         <li><?= htmlspecialchars($error) ?></li>
@@ -54,14 +54,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         <?php endif; ?>
 
-        <form action="" method="POST">
+        <form action="" method="POST" class="form-login">
             <label for="usuario">Usuario</label>
-            <input type="text" name="usuario" id="usuario" required><br>
+            <input type="text" name="usuario" id="usuario" class="input-login" required>
 
             <label for="password">Contraseña</label>
-            <input type="password" name="password" id="password" required>
+            <input type="password" name="password" id="password" class="input-login" required>
 
-            <button type="submit">Iniciar Sesión</button>
+            <button type="submit" class="btn-login">Iniciar Sesión</button>
         </form>
     </div>
 </body>

@@ -630,100 +630,140 @@ body {
 /* =========================================
    14. LOGIN
 ========================================= */
+
+/* Centrar todo el body */
 body.login-body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--color-fondo);
+    background: #121212;
     min-height: 100vh;
-    font-family: var(--fuente-principal);
-    color: var(--color-texto);
+    font-family: 'Poppins', Arial, sans-serif;
+    color: #F0F0F0;
 }
 
+/* Contenedor principal */
 .login-container {
     width: 100%;
-    max-width: 380px;
+    max-width: 360px;
     margin: 6rem auto;
     padding: 2.5rem;
-    background: var(--color-fondo-sec);
-    border-radius: var(--borde-radio);
-    box-shadow: var(--sombra-suave);
+    background: #1E1E1E;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: all 0.3s ease;
 }
 
+/* Título */
 .login-container h1 {
-    color: var(--color-acento);
-    margin-bottom: 1rem;
+    color: #D6B86C;
     font-size: 2rem;
+    margin-bottom: 1.5rem;
     text-align: center;
 }
 
-.login-container p {
-    color: var(--color-texto-sec);
-    margin-bottom: 2rem;
-    text-align: center;
+/* Mensajes de error */
+.login-error {
+    width: 100%;
+    background: #b23a3a;
+    color: #fff;
+    padding: 0.8rem 1rem;
+    border-radius: 15px;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+    font-size: 0.95rem;
+    line-height: 1.3;
 }
 
-.login-form {
+/* Formulario */
+.form-login {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1rem; /* separa los campos y botón */
+    gap: 1rem;
 }
 
-.login-form label {
+/* Labels personalizados */
+.form-login label {
     display: block;
-    color: var(--color-acento-claro);
-    font-weight: 500;
-    margin-bottom: 0.3rem;
-}
-
-.login-form input {
     width: 100%;
-    padding: 0.9rem 1rem;
-    border-radius: var(--borde-radio);
-    border: none;
-    background: var(--color-fondo);
-    color: var(--color-texto);
-    font-size: 1rem;
-    transition: var(--transicion);
-}
-
-.login-form input:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(214,184,108,0.4);
-}
-
-.login-form button {
-    width: 100%;
-    padding: 0.8rem 1.5rem;
-    background: var(--color-acento); /* mismo color que botones internos */
-    color: var(--color-fondo);
     font-weight: 600;
-    border: none;
-    border-radius: var(--borde-radio);
-    cursor: pointer;
+    font-size: 1rem;
+    color: #E8CC84;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+}
+
+/* Inputs personalizados */
+.input-login {
+    width: 100%;
+    padding: 1.2rem 1.5rem;
     font-size: 1.05rem;
-    box-shadow: var(--sombra-suave);
-    transition: var(--transicion);
+    border-radius: 15px;
+    border: none;
+    background: #121212;
+    color: #F0F0F0;
+    margin-bottom: 1rem;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
+    transition: all 0.3s ease;
 }
 
-.login-form button:hover {
-    background: var(--color-acento-claro); /* mismo efecto hover que botones internos */
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+.input-login:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(214,184,108,0.6), inset 0 2px 6px rgba(0,0,0,0.4);
 }
 
-.login-form .error {
+/* Botón personalizado */
+.btn-login {
+    width: 100%;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #D6B86C, #E8CC84);
+    color: #121212;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+    border: none;
+    margin-top: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+    background: linear-gradient(135deg, #E8CC84, #D6B86C);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+/* Mensajes de error específicos de input */
+.input-error {
     color: #b23a3a;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     text-align: center;
+    margin-top: 0.5rem;
 }
 
-.login-form .info {
-    color: var(--color-texto-sec);
-    font-size: 0.9rem;
+/* Mensajes informativos */
+.input-info {
+    color: #C0C0C0;
+    font-size: 0.95rem;
     text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+/* Responsive: móvil */
+@media(max-width: 480px) {
+    .login-container {
+        padding: 2rem 1.5rem;
+        margin: 3rem 1rem;
+    }
+
+    .input-login,
+    .btn-login {
+        padding: 1rem 1.2rem;
+        font-size: 1rem;
+    }
 }
