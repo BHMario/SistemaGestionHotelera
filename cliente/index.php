@@ -1,27 +1,24 @@
 <?php
 session_start();
-
-// Solo usuarios con rol 'cliente' pueden entrar
-if (!isset($_SESSION['usuario']) || !isset($_SESSION['rol']) || $_SESSION['rol'] !== 'usuario') {
+if(!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'usuario'){
     header('Location: ../login/login.php');
     exit;
 }
 
-require_once '../config/db.php';
+include '../includes/header.php';
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Panel Cliente</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-<body>
-    <h1>Bienvenido, <?= htmlspecialchars($_SESSION['usuario']) ?></h1>
-    <nav>
-        <a href="mis_reservas.php">Mis Reservas</a> |
-        <a href="nueva_reserva.php">Hacer Nueva Reserva</a> |
-        <a href="../login/logout.php">Cerrar Sesión</a>
-    </nav>
-</body>
-</html>
+
+<main class="container">
+    <div class="dashboard-modulos" style="justify-content:center;">
+        <a href="mis_reservas.php" class="card acceso">
+            <h3>Mis Reservas</h3>
+            <p>Consulta tus reservas pasadas y actuales.</p>
+        </a>
+        <a href="nueva_reserva.php" class="card acceso">
+            <h3>Nueva Reserva</h3>
+            <p>Realiza una nueva reserva de habitación.</p>
+        </a>
+    </div>
+</main>
+
+<?php include '../includes/footer.php'; ?>

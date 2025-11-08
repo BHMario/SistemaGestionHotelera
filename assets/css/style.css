@@ -767,3 +767,168 @@ body.login-body {
         font-size: 1rem;
     }
 }
+
+/* =========================================
+   15. CLIENTES
+========================================= */
+
+/* Dashboard principal de clientes */
+.cliente-dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 1rem;
+}
+
+.cliente-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.cliente-opciones {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cliente-opciones .card {
+    background: var(--color-fondo-sec);
+    border-radius: var(--borde-radio);
+    box-shadow: var(--sombra-suave);
+    padding: 2rem;
+    width: 260px;
+    text-align: center;
+    color: var(--color-texto);
+    text-decoration: none;
+    transition: var(--transicion);
+}
+
+.cliente-opciones .card h3 {
+    color: var(--color-acento);
+    margin-bottom: 0.5rem;
+}
+
+.cliente-opciones .card p {
+    color: var(--color-texto-sec);
+    font-size: 0.95rem;
+}
+
+.cliente-opciones .card:hover {
+    background: var(--color-acento);
+    color: var(--color-fondo);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+}
+
+.cliente-opciones .card:hover h3,
+.cliente-opciones .card:hover p {
+    color: var(--color-fondo);
+}
+
+/* Contenedores de reservas y nueva reserva usando la misma clase que admin */
+.cliente-reservas-container,
+.cliente-nueva-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 2rem auto;
+    background: var(--color-fondo-sec);
+    padding: 2rem;
+    border-radius: var(--borde-radio);
+    box-shadow: var(--sombra-suave);
+    display: flex;
+    flex-direction: column;
+}
+
+.cliente-reservas-header,
+.cliente-nueva-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.cliente-reservas-header h1,
+.cliente-nueva-header h1 {
+    color: var(--color-acento);
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+/* Tabla de reservas igual al admin */
+.cliente-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-fondo);
+    margin-bottom: 2rem;
+}
+
+.cliente-tabla th,
+.cliente-tabla td {
+    padding: 0.9rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    vertical-align: middle;
+    word-wrap: break-word;
+}
+
+.cliente-tabla th {
+    background: var(--color-fondo-sec);
+    color: var(--color-acento-claro);
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+}
+
+.cliente-tabla td {
+    color: var(--color-texto-sec);
+}
+
+.cliente-tabla tr:nth-child(even) {
+    background: rgba(255,255,255,0.03);
+}
+
+/* Formulario de nueva reserva igual al admin */
+.cliente-form {
+    background: var(--color-fondo-sec);
+    padding: 2rem;
+    border-radius: var(--borde-radio);
+    box-shadow: var(--sombra-suave);
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+.cliente-form label {
+    display: block;
+    color: var(--color-acento);
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+}
+
+.cliente-form input,
+.cliente-form select,
+.cliente-form textarea {
+    width: 100%;
+    padding: 0.7rem;
+    border-radius: var(--borde-radio);
+    border: none;
+    margin-bottom: 1.2rem;
+    background: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+.cliente-form button {
+    background: var(--color-acento);
+    color: var(--color-fondo);
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: var(--borde-radio);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transicion);
+}
+
+.cliente-form button:hover {
+    background: var(--color-acento-claro);
+}

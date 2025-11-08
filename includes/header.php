@@ -1,11 +1,8 @@
 <?php
-// includes/header.php - Cabecera HTML común para todo el sistema
 if (session_status() === PHP_SESSION_NONE) session_start();
 
-// Calcula la ruta base del proyecto
-$scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']));
-$basePath = $scriptDir === '/' ? '' : $scriptDir;
-
+// Ruta base absoluta del proyecto
+$basePath = ''; // si tu proyecto está en la raíz del servidor
 $assetVersion = 'v1.2';
 ?>
 <!doctype html>
@@ -20,9 +17,7 @@ $assetVersion = 'v1.2';
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- CSS global -->
-    <link rel="stylesheet" href="<?php 
-        echo strpos($_SERVER['SCRIPT_NAME'], '/modules/') !== false ? '../../assets/css/style.css?v='.$assetVersion : 'assets/css/style.css?v='.$assetVersion; 
-    ?>">
+    <link rel="stylesheet" href="<?= $basePath ?>/assets/css/style.css?v=<?= $assetVersion ?>">
 
     <!-- Favicon -->
     <link rel="icon" href="<?= $basePath ?>/assets/img/favicon.ico" type="image/x-icon">
